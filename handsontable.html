@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>handsontable示例</title>
+		<script src='./js/jquery-2.1.1.js'></script>
+		<script src="./js/handsontable.full.js"></script>
+		<script src="./js/webcomponents-lite.min.js"></script>
+	    <link rel='import' href='./bower_components/paper-button/paper-button.html'>
+		<link rel="stylesheet" media="screen" href="./css/handsontable.full.css">
+		<link rel="import" href="./sky.html">
+		<style>
+		.container{
+			width:800px;
+			height:600px;
+			margin:0 auto;
+			margin-top: 50px; 
+		}
+		#con{
+			width:400px;
+			height:150px;
+			overflow: auto;
+			margin:0 auto;
+			margin-top: 20px;
+		}
+	    #section-paper-button paper-button[toggles] {
+	      transition: background-color 0.3s;
+	    }
+
+	    #section-paper-button paper-button[toggles][active] {
+	      background-color: #3ea1e6;
+	      color:white;
+	    }
+		</style>
+	</head>
+	<body>
+		<div class='container'>
+			<section id="section-paper-button">
+				<div class="horizontal center-justified layout">
+					<div class="horizontal-section-wrapper">   
+				      <div class="horizontal-section">
+				        <paper-button tabindex="0" class="primary" toggles id='new'>New</paper-button>
+						<paper-button tabindex="0" class="primary" toggles id='export'>Export</paper-button>
+						<paper-button tabindex="0" class="primary" toggles id='save'>Save</paper-button>
+						<paper-button tabindex="0" class="primary" toggles id='saveas'>Save As</paper-button>
+						<paper-button tabindex="0" class="primary" toggles id='upload'>upload</paper-button>		
+						<paper-button tabindex="0" class="primary" toggles id='log10'>log10</paper-button>
+						<paper-button tabindex="0" class="primary" toggles id='log2'>log2</paper-button>
+						<paper-button tabindex="0" class="primary" toggles id='sqrt'>√</paper-button>	
+						<span>第
+						<select id='filter_col'>					
+						</select>			    
+						列，				
+				        <select id='filter_compare'>					
+						</select>				
+				        <select id='filter_limitation'>
+							<option value='20'>20</option>
+						</select>		        
+						<paper-button tabindex="0" class="primary" toggles  style='margin-right: 10px' id='filter'>filter</paper-button>	        
+				      </div>
+				    </div>
+				</div>
+			</section>						
+			<div id='con'></div>
+		</div>		
+		<script src='./json/handsontable.json'></script>
+		<script>
+			$(document).ready(function(w){
+				var hsd = {};
+
+				//容器
+				hsd.con = $('#con');				
+
+				// ----------函数开始----------------------
+				//获取数据
+				hsd.getData = function(){
+					// $.get('json/handsontable.json', function(data){
+						hsd.data = data;
+						hsd.pageInit(hsd.data);
+						hsd.createTable();
+						hsd.logCal();
+						hsd.filter();
+					// });
+				}
+				//页面初始化:加载过滤的条件
+				hsd.pageInit = function(data){
+					//加载列的数目
+					var str = '';
+					for(var i=0, l=data[0].length; i<l; i++){
+						str += '<option value='+i+'>'+(i+1)+'</option>';
+					}
+					$('#filter_col').html(str);
+					//加载比较的运算符
+					str = '';
+					str += '<option value='+0+'>大于</option>';
+					str += '<option value='+1+'>小于</option>';
+					$('#filter_compare').html(str);
+				}
+				//表格初始化配置
+				hsd.createTable = function(){
+					hsd.hot = new Handsontable(hsd.con[0], {
+						data: JSON.parse(JSON.stringify(hsd.data)),
+					    rowHeaders: true,
+					    colHeaders: ['SLE', 'Control'],
+					    contextMenu: true,
+					    columnSorting: true,
+					    manualColumnResize: true,
+					    fixedRowsTop: 1,
+    					fixedColumnsLeft: 1,
+					 	sortIndicator: true
+					});					
+				};
+				/*
+				* 对数据的大量运算（log，filter），都有两种解决方案：一、web workers在后台运行；二、在当前浏览器运行
+				* 把两种解决方案封装为hsd.webWorkersCon，运算的后续操作（save and show）也在hsd.webWorkersCon中执行
+				*/
+				//log运算
+				hsd.logCal = function(){
+					//argu有四个属性
+					var argu = {};
+					//触发过滤的元素
+					argu.origin_ele = '#log10';
+					argu.workers_path = './js/workersLog.js';
+					argu.callback = hsd.logCalOpe;
+					//argu是传给hsd.webWorkersCon的参数；argu.data是传给web workers中参数；argu.data.data是传给web workers的数据
+					argu.data = {};
+					argu.data.data = hsd.hot.getData();
+
+					hsd.webWorkersCon(argu);					
+				}
+				//log运算操作;如果浏览器不支持web workers，就需要在浏览器中进行运算
+				hsd.logCalOpe = function(argu){
+					var result = [];
+
+					for(var i = 0, l = argu.data.length; i < l; i++){
+						for(var j = 0, k = argu.data[i].length; j < k; j++){
+							if(+argu.data[i][j] > 0){
+								argu.data[i][j] = Math.log(argu.data[i][j])/Math.LN10;
+							}
+						}
+					}
+
+					return argu.data;
+				}
+				//log运算后，保存和显示操作
+				hsd.logSaveShow = function(data){
+					//把完整的数据保存在服务器端
+
+					//显示3位小数
+					for(var i = 0, l = data.length; i < l; i++){
+						for(var j = 0, k = data[i].length; j < k; j++){						
+								data[i][j] = Math.round(data[i][j].toFixed(3)*100)/100;							
+						}
+					}
+
+					return data;
+				}
+				//过滤
+				hsd.filter = function(){
+					//argu有四个属性
+					var argu = {};
+					//触发过滤的元素
+					argu.origin_ele = '#filter';
+					argu.workers_path = './js/workersFilter.js';
+					//传给web workers的参数
+					argu.data = {};
+					argu.data.data = hsd.hot.getData();					
+					argu.callback = hsd.filterOpe;
+
+					hsd.webWorkersCon(argu);					
+				}
+				//过滤的具体操作;如果浏览器不支持web workers，就需要在浏览器中进行运算
+				hsd.filterOpe = function(argu){
+					var result = [];
+					var filter_compare = argu.compare;
+					var filter_limitation = argu.limitation;
+					var filter_col = argu.col;
+
+					for(var i = 0, l = argu.data.length; i < l; i++){
+						var item = argu.data[i];
+						if(filter_compare == 0){
+							if(item[filter_col] >= filter_limitation){
+								result.push(item);
+							}
+						}else{
+							if(item[filter_col] <= filter_limitation){
+								result.push(item);
+							}
+						}
+					}
+
+					return result;
+				}
+				//web workers封装函数
+				hsd.webWorkersCon = function(argu){
+					//typeof(Worker) !== 'undefined'
+					if(typeof(Worker) !== 'undefined'){
+						$(argu.origin_ele).on('click', function(){
+
+							if(argu.origin_ele == '#filter'){
+								var filter_col = $('#filter_col').val();
+								var filter_compare = $('#filter_compare').val();
+								var filter_limitation = $('#filter_limitation').val();
+								argu.data.col = filter_col;
+								argu.data.compare = filter_compare; 
+								argu.data.limitation =  filter_limitation;
+							}
+							
+							var w = new Worker(argu.workers_path);
+							//workers.js通过e.data.data才能取到array							
+							w.postMessage(argu.data);
+							w.onmessage = function(event){								
+								var data = [];
+
+								if(argu.origin_ele == '#log10'){
+									data = hsd.logSaveShow(event.data);
+								}else{
+									data = event.data;
+								}
+
+								hsd.hot.updateSettings({
+								   data:JSON.parse(JSON.stringify(data))
+								});
+								
+								w.terminate();								
+							};
+							w.onerror = function(event){
+								console.error('web workers:'+event.message+', '+event.lineno+'; '+event.filename);
+								w.terminate();							
+							};
+						});						
+					}else{
+						console.log('浏览器不支持web workers');						
+						$(argu.origin_ele).on('click', function(){
+							if(argu.origin_ele == '#filter'){
+								var filter_col = $('#filter_col').val();
+								var filter_compare = $('#filter_compare').val();
+								var filter_limitation = $('#filter_limitation').val();
+								argu.data.col = filter_col;
+								argu.data.compare = filter_compare; 
+								argu.data.limitation =  filter_limitation;
+							}
+
+							var data = argu.callback(argu.data);
+
+							if(argu.origin_ele == '#log10'){
+								data = hsd.logSaveShow(data);
+							}else{
+								data = data;
+							}
+
+							hsd.hot.updateSettings({
+							   data:JSON.parse(JSON.stringify(data))
+							});
+						});
+					}
+				}
+
+				hsd.getData();
+				//----------函数结束----------------------
+
+				w.hsd = hsd; 
+			}(window));			
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
