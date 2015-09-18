@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Medical Experiment Analysis</title>
+
+    <!-- polymer 函数引入 优先于polymer的其他引入 -->
+    <script src="../../static/js/webcomponents-lite.js"></script>
+
+    <!-- css 引入 -->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" >
+    <link rel="stylesheet" media="screen" href="../../static/css/handsontable.full.css">
+    <link rel="stylesheet" href="../../static/js/themes/default/style.min.css" />
+
+    <!-- 自己写的css -->
+    <link rel="stylesheet" href="../../static/css/showpage.css" />
+
+    <!--ploymer标签引入-->
+    <link rel="import" href="../../static/polymer/iron-icons/iron-icons.html">    
+    <link rel="import" href="../../static/polymer/paper-button/paper-button.html">
+    <!-- <link rel="import" href="../../static/polymer/paper-fab/paper-fab.html"> -->
+
+    <!--ploymer主题引入-->
+    <link rel="import" href="../../static/polymer-themes/sky.html">
+
+</head>
+<body>
+<div class='container'>
+    <!-- 导航 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="nav_con">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav_content">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <!-- <span class="icon-bar"></span> -->
+                </button>
+                <a class="navbar-brand" href="index.html">Bio Medical big data analysis platform</a>
+            </div>
+            <div class="collapse navbar-collapse" id="nav_content">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="/login/logOut">Exit</a></li>
+                </ul>
+            </div>      <!-- /.navbar-collapse -->
+        </div>    <!-- /.nav_con -->
+    </nav>
+    <!-- 主要内容 -->
+    <div class="main" id="flag" >
+        <ul class="nav nav-tabs" role="tablist" id="tab">
+            <li role="presentation" class='active'><a href="#file" aria-controls="file" role="tab" data-toggle="tab" >File</a></li>
+            <li role="presentation" ><a href="#data" aria-controls="data" role="tab" data-toggle="tab">Data</a></li>
+            <li role="presentation"><a href="#analysis" aria-controls="analysis" role="tab" data-toggle="tab">Analysis</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- file标签 -->
+            <div role="tabpanel" class="tab-pane  active" id="file">
+                <section id="section_file">
+                    <div class="horizontal layout">
+                        <div class="horizontal-section-wrapper">
+                            <div class="horizontal-section">
+                                <paper-button tabindex="0" class="primary" id='file_upload' data-toggle="modal" data-target="#upload_modal">upload</paper-button>                                
+                                <paper-button tabindex="0" class="primary" id='file_new'>New</paper-button>
+                                <paper-button tabindex="0" class="primary" id='file_export'>Export</paper-button>
+                                                              
+                            </div><!-- .horizontal-section -->
+                        </div><!-- .horizontal-section-wrapper -->
+                    </div><!-- .horizontal -->
+                </section>
+                <div id="trelist" >
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class='tree_name'>
+                                <p>Data tables</p>
+                            </div>
+                            <a id='file_export_a' href=''></a>
+                            <div id="tree_files" style="height:300px; overflow-y:scroll"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class='tree_name'>
+                                <p>Results</p>
+                            </div>
+                            <div id="tree_results" style="height:300px; overflow-y:scroll"></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class='tree_name'>
+                                <p>Graphs</p>
+                            </div>
+                            <div id="tree_graphs" style="height:300px; overflow-y:scroll"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- analysis标签    -->
+            <div role="tabpanel" class="tab-pane" id="analysis">这里是分析内容
+                <!-- <div id="trelist" >
+                </div> -->
+            </div>
+            <!-- data标签 -->
+            <div role="tabpanel" class="tab-pane" id="data">
+                <div class='data_con' id='data_con'>
+                    <section id="section_data">
+                        <div class="horizontal layout">
+                            <div class="horizontal-section-wrapper">
+                                <div class="horizontal-section">
+                                    <paper-button tabindex="0" class="primary" id='data_upload' data-toggle="modal" data-target="#upload_modal">upload</paper-button>
+                                    <paper-button tabindex="0" class="primary" id='data_new'>New</paper-button>                                    
+                                    <paper-button tabindex="0" class="primary" id='data_save'>Save</paper-button>
+                                    <paper-button tabindex="0" class="primary" id='data_saveas' data-toggle="modal" data-target="#data_modal" data-title='Save As File'>Save As</paper-button>
+                                    <paper-button tabindex="0" class="primary" id='data_export'><a href='#'>Export</a></paper-button>
+                                    <paper-button tabindex="0" class="primary" id='data_log10'>log10</paper-button>
+                                    <paper-button tabindex="0" class="primary" id='data_log2'>log2</paper-button>
+                                    <paper-button tabindex="0" class="primary" id='data_sqrt'>√</paper-button>
+                                    <span>第</span>
+                                    <select id='filter_col'>
+                                    </select>
+                                    列，
+                                    <select id='filter_compare'></select>
+                                    <select id='filter_limitation'>
+                                        <option value='30'>30</option>
+                                    </select>
+                                    <paper-button tabindex="0" class="primary" toggles  style='margin-right: 10px' id='data_filter'>filter</paper-button>
+                                </div><!-- .horizontal-section -->
+                            </div><!-- .horizontal-section-wrapper -->
+                        </div><!-- .horizontal -->
+                    </section>
+                    <p><span id="table_name"></span><span class="table_name_star" id='table_name_star'>*</span></p>
+                    <!-- <form class="form-inline table_name_con">
+                        <div class="form-group">
+                        <label for="table_name">Table Name:</label>
+                        <input readonly disabled type="text" class="form-control" id="table_name" name='table_name' placeholder="Table Name">
+                        </div>
+                        <span class="table_name_star">*</span><paper-fab class='table_name_edit' icon="create" title="create" tabindex="0"></paper-fab></p>
+                    </form> -->                    
+                    <div id='con'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框 改变表格的名字 -->
+<div class="modal fade" id='data_modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Save File</h4>
+            </div>
+            <div class="modal-body">
+                <p><span class="glyphicon glyphicon-file" aria-hidden="true"></span><input placeholder='Enter file name' type='text' id='table_name_save' /></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 模态框 上传文件-->
+<div class="modal fade" id='upload_modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload File</h4>
+            </div>
+            <div class="modal-body">
+                <input type='file' accept=".csv" id='upload_file' name='upload_file' onchange="hsd.checkUploadFileType(this, '.csv')"/>
+                <input type='button' value='upload' id='upload_file_button' name='upload_file_button'/>
+            </div>
+            <div class="modal-footer"> 
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 模态框 显示返回信息-->
+<div class="modal fade" id='message_modal'>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- file data tables delete时，确定是否删除-->
+<div class="modal fade" id='delete_modal'>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" id='delete_no'>No</button>
+                <button type="button" class="btn btn-default pull-right" id='delete_yes'>Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 是否保存，如果有表，打开新表或者new是，是否保存-->
+<div class="modal fade" id='save_modal'>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" id='save_no'>No</button>
+                <button type="button" class="btn btn-default pull-right" id='save_yes'>Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--js引入-->
+<script src="../../static/js/jquery-2.1.4.min.js"></script>
+<script src="../../static/js/jquery.cookie.js"></script>
+<script src="../../static/js/ajaxfileupload.js"></script>
+<script src="../../static/js/underscore-min.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/handsontable.full.js"></script>
+<script src="../../static/js/ZeroClipboard.min.js"></script>
+<script src="../../static/js/jstree.min.js"></script>
+<script src="../../static/js/common.js"></script>
+<script src="../../static/js/showpage.js"></script>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>
+
+
+
+
+
+
+
+	
+
+
+

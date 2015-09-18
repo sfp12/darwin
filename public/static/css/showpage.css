@@ -1,0 +1,293 @@
+paper-button:hover{
+    background-color: #ecedf0;
+    font-weight: bold;
+}
+
+body{
+    /*如果没有登录的话，会跳转到login，这里不用处理*/
+    /*display: none;*/
+}
+
+/*--------------导航条--------------------*/
+.nav_con {
+    padding: 0 15px;
+    margin:0 auto;
+}
+
+/*---------------主要内容--------------------------*/
+.main {
+    padding: 0 15px;
+    margin:0 auto;
+    padding-top:100px;
+    padding-left:30px;
+    height:500px;
+}
+
+.main li{
+    width: 100px;
+    text-align: center;
+}
+
+.nav-tabs li a{
+    background: #ecedf0;
+    border-top: 1px solid #cececf;
+    border-right: 1px solid #cececf;
+} 
+
+/*---------------file部分--------------------------*/
+#trelist{
+    /*padding-top: 20px;*/
+}
+
+#trelist .col-md-4{
+    padding: 0;
+    padding-right: 10px;    
+}
+
+#trelist .col-md-4 div{
+    border: 1px solid black; 
+}
+
+#trelist .col-md-4 .tree_name{
+    border-bottom: none;
+    background-color: #447bdc;
+    color:white;        
+}
+
+#trelist .col-md-4 #tree_files,
+#trelist .col-md-4 #tree_results,
+#trelist .col-md-4 #tree_graphs{
+    padding: 10px;
+}
+
+#section_file{
+    padding: 0;
+    margin-bottom: 10px;
+}
+#section_file paper-button[toggles] {
+    transition: background-color 0.3s;
+}
+#section_file paper-button[toggles][active] {
+    background-color: #3ea1e6;
+    color:white;
+}
+
+#file_export[active] a{
+    color: white;
+}
+
+#file_export a:hover{
+    text-decoration: none;
+}
+
+.tree_name{
+    height:30px;
+}
+
+.tree_name p{
+    padding-bottom: 0;
+    line-height: 30px;
+    padding-left: 20px;
+}
+
+#file_export_a{
+    display: none;
+}
+
+#tree_files a:hover{
+    color:#447bdc;
+}
+
+#tree_files li{
+    width: 100%;
+    text-align: left;
+}
+
+/*#tree_files中的li被选中(active)的状态*/
+#tree_files li.active{
+    background: #447bdc;
+}
+
+#tree_files li.active a{
+    background: #447bdc;
+    color:white;
+}
+
+/*#tree_results中的li被选中(active)的状态 */
+#tree_results li{
+    width: 100%;
+    text-align: left; 
+}
+
+#tree_results li.active{
+    /*background: #447bdc;    */
+}
+
+#tree_results li.active a{
+    background: #447bdc;
+    color:white;
+}
+
+/*#tree_results中的li被选中(active)的状态 */
+#tree_graphs li{
+    width: 100%;
+    text-align: left; 
+}
+
+#tree_graphs li.active{
+    /*background: #447bdc;    */
+}
+
+#tree_graphs li.active a{
+    background: #447bdc;
+    color:white;
+}
+
+#delete_modal .modal-footer{
+    padding: 15px 50px;    
+}
+
+
+/*---------------data部分--------------------------*/
+/*DATA部分的容器*/
+.data_con{
+    width:100%;
+    height:400px;
+    margin:0 auto;
+}
+
+/*按钮部分*/
+#section_data{
+    padding: 0;
+    margin-bottom: 10px;
+}
+#section_data paper-button[toggles] {
+    transition: background-color 0.3s;
+}
+#section_data paper-button[toggles][active] {
+    background-color: #3ea1e6;
+    color:white;
+}
+
+#data_export[active] a{
+    color: white;
+}
+
+#data_export a:hover{
+    text-decoration: none;
+}
+
+/*table名字*/
+/*table name 不需要修改*/
+/*.table_name_con label{
+    font-size: 16px;
+    font-weight: bold;
+    color:#3ea1e6;
+}*/
+
+.table_name_star{
+    display: none;
+    margin-left: 10px;
+}
+
+/*#section-paper-fab paper-fab {
+    display: block;
+    margin-bottom:24px;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+/*.table_name_edit{
+    width:16px;
+    height:16px;
+    padding:3px;
+    margin-left: 10px;
+}
+
+.table_name_edit iron-icon{
+    width: 10px;
+    height: 10px;
+}*/
+
+#table_name{
+    border-bottom: 1px solid #447bdc;
+    color: #447bdc;
+    /*min-width: 100px; */
+    display: inline-block;
+}
+
+/*table的容器*/
+#con{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    margin:0 auto;
+    margin-top: 20px;
+}
+
+/*file modal*/
+.modal h4.modal-title{
+    text-align: center;
+}
+.modal-body p{
+    text-align: center;
+}
+.modal-body p span{
+    margin-right: 20px;
+}
+
+/*upload modal*/
+#upload_modal input{
+    display: inline-block;
+}
+
+/*file部分*/
+#trelist .row .folder{
+    background:url('../images/file_sprite.png') right bottom no-repeat;
+}
+
+#trelist .row .file { 
+    background:url('../images/file_sprite.png') 0 0 no-repeat; 
+}
+
+#trelist .row .file-xls,
+#trelist .row .file-xlsx {
+    background-position: -362px -0px 
+}
+
+#trelist .row .file-text{
+    background-position: -254px -18px
+}
+
+#tree_data .folder { 
+    background:url('../images/file_sprite.png') right bottom no-repeat; 
+}
+
+#tree_data .file { 
+    background:url('../images/file_sprite.png') 0 0 no-repeat; 
+}
+
+#tree_data .file-xls, 
+#tree_data .file-xlsx { 
+    background-position: -362px -0px 
+}
+
+/*---------------页脚--------------------*/
+.footer {
+    width: 100%;
+    background-color: #f8ecc2;
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    z-index: 1030;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+
+
+
+
+
+

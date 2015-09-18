@@ -1,0 +1,30 @@
+[
+    {
+        "text": "table1.xls",
+        "children": false,
+        "id": "table1",
+        "type": "file",
+        "icon": "file file-xls"
+    },
+    {
+        "text": "table2.xls",
+        "children": false,
+        "id": "table2",
+        "type": "file",
+        "icon": "file file-xls"
+    },
+    {
+        "text": "table3.xls",
+        "children": false,
+        "id": "table3",
+        "type": "file",
+        "icon": "file file-xls"
+    },
+    {
+        "text": "table4.xls",
+        "children": false,
+        "id": "table4",
+        "type": "file",
+        "icon": "file file-xls"
+    }
+]

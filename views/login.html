@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+  <title>Medical Experiment Analysis</title>
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">  
+  
+  <!--引入js -->
+  <script src="../../static/js/webcomponents-lite.js"></script>
+  <script src="../../static/js/jquery-2.1.4.min.js"></script>
+  <script src="../../static/js/jquery.cookie.js"></script>  
+  <script src="../../static/js/bootstrap.min.js"></script>
+  <script src="../../static/js/common.js"></script>
+  <script src="../../static/js/index.js"></script>
+
+  <!--ploymer样式 -->
+  <link rel="import" href="../../static/polymer-themes/sky.html">
+  <link rel="import" href="../../static/polymer/paper-styles/demo-pages.html">
+  
+  <!--引入css-->
+  <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/css/index.css" />
+  <link href="../../static/css/camera.css" rel="stylesheet">
+  <link href="../../static/css/templatemo_style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../static/css/style.min.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <!-- <span class="icon-bar"></span> -->
+                  </button>
+                  <a class="navbar-brand" href="index.html">Bio Medical big data analysis platform</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li>
+                          <a href="#">About</a>
+                      </li>
+                      <li>
+                          <a href="#">Services</a>
+                      </li>
+                      <li>
+                          <a href="#">Contact</a>
+                      </li>                        
+                  </ul>
+              </div>            <!-- /.navbar-collapse -->
+          </div>        <!-- /.container -->
+  </nav>
+
+  <div class='carousel_login'>
+    <header id="myCarousel" class="carousel slide pull-left">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+              <div class="item active">
+                  <div class="fill" style="background-image:url(../../static/images/bb.jpg);"></div>
+                  <div class="carousel-caption">
+                      <h2>临床医学</h2>
+                  </div>
+              </div>
+              <div class="item">
+                  <div class="fill" style="background-image:url(../../static/images/cc.png);"></div>
+                  <div class="carousel-caption">
+                      <h2>大数据分析</h2>
+                  </div>
+              </div>
+              <div class="item">
+                  <div class="fill" style="background-image:url(../../static/images/dd.png);"></div>
+                  <div class="carousel-caption">
+                      <h2>生物大数据</h2>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span class="icon-prev"></span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+              <span class="icon-next"></span>
+          </a>
+    </header>
+    <div class="login pull-right">
+      <ul class="nav nav-pills nav-justified nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#login" role='tab' data-toggle="tab">登陆</a></li>
+        <li role="presentation"><a href="#regist" role='tab' data-toggle="tab">注册</a></li>        
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="login">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="uname" class="col-sm-3 control-label">邮箱</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="uname" name='uname' placeholder="邮箱">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-3 control-label">密码</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="password" name='password' placeholder="密码">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="validate_login" class="col-sm-3 control-label">验证码</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="validate_login" name='validate_login' placeholder="验证码">                        
+              </div>
+              <div class='col-sm-5'>
+                 <img class="form-control-static" src='login/getCode' id='v_l_img' atl='验证码' /> 
+              </div>
+            </div>
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <button id='submit_l' class="btn btn-primary btn-block">登陆</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="regist">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="email" class="col-sm-3 control-label">邮箱</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="email" name='email' placeholder="邮箱">
+              </div>
+            </div>            
+            <div class="form-group">
+              <label for="validate_regist" class="col-sm-3 control-label">验证码</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="validate_regist" name='validate_regist' placeholder="验证码">                        
+              </div>
+              <div class='col-sm-5'>
+                 <img class="form-control-static" src='login/getCode' id='v_r_img' atl='验证码' /> 
+              </div>
+            </div>
+            <div class="form-group">
+              <div class='col-sm-12'>
+                <button id='submit_r' class="btn btn-primary btn-block">注册</button>
+                <!-- <div id='test'></div> -->
+              </div>
+            </div> 
+          </form>
+        </div>
+        
+      </div>       
+    </div>
+  </div>
+    
+<div id="templatemo_upcomming_event1" class="container_wapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 section_header">
+                    <h1>Events</h1>
+                </div>
+               
+                
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_left">
+                        <img src="../../static/images/aa1.jpg" alt="Event 1" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>利用大数据挖掘、机器学习和人工智能技术分析高通量生物数据及药物数据， 能够对生物问题的机制进行解释，更加精准及个体化的设计in-silico药物<br />
+                        
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_left">
+                        <img src="../../static/images/cc.jpg" alt="Event 2" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>基因组数据为输入变量、特征/疾病/表型的数据为输出变量，利用大规模的训练数据去训练模型，预测基因组的突变会如何改变细胞，改变人体的表现。<br />
+                                   
+                            </li>
+                          
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_right">
+                        <img src="../../static/images/dd.jpg" alt="Event 3" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>利用培养皿就可以轻松地对血清素神经元进行培养，利用人成纤维细胞成功地转化成了可分泌血清素的神经元,诱导人类大脑中血清素神经元<br />
+                                  
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="event_box event_animate_right">
+                        <img src="../../static/images/ee.jpg" alt="Event 4" class="img-responsive" />
+                        <ul>
+                            <li>
+                                    <span class="glyphicon glyphicon-calendar"></span>利用高特异性的X射线晶体学技术解析了低氧诱导性因子（HIFs）的蛋白结构，低氧诱导性因子是肿瘤对低氧反应的重要调节子。<br />
+                                  
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+</div>
+
+
+
+
+<footer class="footer" id="foot">
+<hr/>
+<div class="row footer-bottom">
+          <ul class="list-inline text-center">
+            <li><a href="#" target="_blank">@版权所有 生物科技有限公司 </a></li><li>编码11010802014853</li>
+          </ul>
+</div>
+</footer>
+
+
+
+  </body>
+</html>
