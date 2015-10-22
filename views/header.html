@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$title}</title>
+<link href="../../static/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!--container start -->
+<div class="container">
+	<div class="innerWrap">
+  <!--headerBg start-->
+  <div class="headerBg">
+    <div class="header">
+    	<div class="topNav">
+      	<a href="#">登录</a>
+      </div>
+        <div class="topImg">
+            <img src="../../static/images/logopic.png"/>
+        </div>
+      <a href="/index.php" class="logo">系统免疫基础数据库</a>
+      <div class="nav">
+        <div class="menu">
+          <li> <a href="/index/index" {if $action eq 'index' && $currentC eq 'index'} class="active"{/if} >项目介绍</a></li>
+          <li> <a href="/analysis/show" {if $action eq 'show'} class="active"{/if}>数据检索</a></li>
+          <li> <a href="/analysis/base" {if $action eq 'base'} class="active"{/if}>基本分析</a></li>
+          <li> <a href="/analysis/comprehensive" {if $action eq 'comprehensive'} class="active"{/if}>综合分析</a></li>
+          <li> 
+            <a href="/dm/index" {if $currentC eq 'dm'} class="active"{/if}>数据挖掘</a>
+             <div class="secondMenu">
+                <a href="/dm/index">聚类分析</a>
+                <a href="/dm/dynamic">数据交互</a>
+ 		<a href="/dm/insight">compare insight</a>
+            </div>            
+          </li>
+          <li> <a href="/admin/index" {if $currentC eq 'admin'} class="active"{/if}>数据管理</a></li>
+          <li> <a href="/index/contact" {if $action eq 'contact'} class="active"{/if}>关于我们</a></li>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--headerBg end-->

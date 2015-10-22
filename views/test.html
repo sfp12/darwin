@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebMonitor</title>
+  <style>
+  div{
+    font-size:20px;
+  }
+  </style>
+</head>
+<body>
+  <input type='text' id='test'/>
+  <p id='result'>123</p>
+    
+  </div>
+  <script src="../static/js/jquery-2.1.4.js"></script>
+  <script>
+  jQuery(function($){
+    // (function($){
+      var o = $({});
+   
+      $.subscribe = function(){
+          o.on.apply(o, arguments);
+      }
+   
+      $.unsubscribe = function(){
+          o.off.apply(o, arguments);
+      }
+   
+      $.publish = function(){
+          o.trigger.apply(o, arguments);
+      }
+     
+    // })(jQuery)
+     
+    function handle(e, a){
+      $('#result').text(a);
+    }
+     
+    $.subscribe('sfp', handle);
+    
+    $('#test').on('blur', function(){
+      $.publish('sfp', $('#test').val());
+    })
+  })
+  </script>
+</body>
+</html>

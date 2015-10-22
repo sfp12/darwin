@@ -1,0 +1,121 @@
+@charset "UTF-8";
+paper-button:hover {
+  background-color: #ecedf0;
+  font-weight: bold; }
+
+/* ------------导航条---------------*/
+.nav-con {
+  padding: 0 15px;
+  margin: 0 auto; }
+
+/* ------------主要内容---------------*/
+.main {
+  padding: 100px 15px 0 30px;
+  margin: 0 auto;
+  height: 500px; }
+  .main li {
+    width: 100px;
+    text-align: center; }
+
+.nav-tabs li a {
+  background: #ecedf0;
+  border-top: 1px solid #cececf;
+  border-right: 1px solid #cececf; }
+
+/* ------------file 部分---------------*/
+/* 每颗树的每条li共有的样式 */
+#trelist .col-md-4 {
+  padding: 0;
+  padding-right: 10px; }
+  #trelist .col-md-4 .folder {
+    background: url("../images/file_sprite.png") right bottom no-repeat; }
+  #trelist .col-md-4 .file {
+    background: url("../images/file_sprite.png") 0 0 no-repeat; }
+  #trelist .col-md-4 .file-xls {
+    background-position: -362px 0px; }
+  #trelist .col-md-4 .file-xlsx {
+    background-position: -362px 0px; }
+  #trelist .col-md-4 .file-text {
+    background-position: -254px -18px; }
+  #trelist .col-md-4 .tree-name {
+    height: 30px;
+    border-bottom: none;
+    background-color: #447bdc;
+    color: white; }
+    #trelist .col-md-4 .tree-name p {
+      padding-bottom: 0;
+      line-height: 30px;
+      padding-left: 20px; }
+  #trelist .col-md-4 div {
+    border: 1px solid black; }
+  #trelist .col-md-4 .tree-item {
+    padding: 10px; }
+    #trelist .col-md-4 .tree-item a:hover {
+      color: #447bdc; }
+    #trelist .col-md-4 .tree-item li {
+      width: 100%;
+      text-align: left; }
+      #trelist .col-md-4 .tree-item li.active {
+        background-color: #447bdc; }
+        #trelist .col-md-4 .tree-item li.active a {
+          background-color: #447bdc;
+          color: white; }
+
+#file section {
+  padding: 0;
+  margin-bottom: 10px; }
+
+#file-export-a {
+  display: none; }
+
+#delete-modal .modal-footer {
+  padding: 15px 50px; }
+
+/*--------------data部分---------------------*/
+.data-con {
+  width: 100%;
+  height: 400px;
+  margin: 0 auto; }
+  .data-con #data-export a:hover {
+    text-decoration: none; }
+  .data-con .table-name-star {
+    display: none;
+    margin-left: 10px; }
+  .data-con #table-name {
+    border-bottom: 1px solid #447bdc;
+    color: #447bdc;
+    display: inline-block; }
+  .data-con #con {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 20px auto 0; }
+
+#data-con section {
+  padding: 0;
+  margin-bottom: 10px; }
+
+/*-----------modal-------------*/
+.modal h4.modal-title {
+  text-align: center; }
+
+.modal-body p {
+  text-align: center; }
+  .modal-body p span {
+    margin-right: 20px; }
+
+#upload-modal input {
+  display: inline-block; }
+
+/*---------------页脚--------------------*/
+.footer {
+  width: 100%;
+  background-color: #f8ecc2;
+  position: fixed;
+  bottom: 0;
+  height: 80px;
+  z-index: 1030;
+  text-align: center;
+  padding: 10px 0; }
+
+/*# sourceMappingURL=showpage-t.css.map */

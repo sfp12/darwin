@@ -1,0 +1,228 @@
+@charset "UTF-8";
+// 是写成了scss，不过得根据html修改一下，得下一期了再改改
+// id,class都用-，js用-
+// 命名重新梳理一下，去掉多余的引用
+
+// 变量
+// paper-button hover 背景颜色
+$button-bgc: #ecedf0;
+// 深蓝色
+$blue-bgc: #447bdc;
+
+paper-button {
+	&:hover {
+		background-color: $button-bgc;
+		font-weight: bold;
+	}
+}
+
+/* ------------导航条---------------*/
+// 最上面的导航条
+.nav-con{
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+/* ------------主要内容---------------*/
+.main{
+	padding: 100px 15px 0 30px;
+	margin: 0 auto;
+	height: 500px;
+
+	li{
+		width: 100px;
+		text-align: center;
+	}
+	
+}
+
+// main中的三个tab
+.nav-tabs{
+	li{
+		a{
+			background: $button-bgc;
+		    border-top: 1px solid #cececf;
+		    border-right: 1px solid #cececf;
+		}
+	}
+}
+
+/* ------------file 部分---------------*/
+/* 每颗树的每条li共有的样式 */
+@mixin tree{
+	padding: 10px;
+
+	a:hover{
+		color: $blue-bgc;
+	}
+
+	li{
+		width:100%;
+		text-align: left;
+
+		&.active{
+			background-color: $blue-bgc;
+
+			a{
+				background-color: $blue-bgc;
+				color: white;
+			}
+		}
+	}	
+}
+
+#trelist{
+	.col-md-4{
+		padding: 0;
+		padding-right: 10px;
+
+		.folder{
+			background:url('../images/file_sprite.png') right bottom no-repeat;
+		}
+
+		.file{
+			background:url('../images/file_sprite.png') 0 0 no-repeat;
+		}
+
+		.file-xls{
+			background-position: -362px -0px
+		}
+
+		.file-xlsx{
+			background-position: -362px -0px
+		}
+
+		.file-text{
+		    background-position: -254px -18px
+		}
+
+		.tree-name{
+			height:30px;
+			border-bottom: none;
+			background-color: $blue-bgc; 
+			color: white;
+
+			p{
+				padding-bottom: 0;
+			    line-height: 30px;
+			    padding-left: 20px;
+			}
+		}
+
+		div{
+			border:1px solid black;
+		}
+
+		.tree-item{
+
+			@include tree;
+			
+		}		
+	}
+}
+
+#file{
+	section{
+		padding: 0;
+		margin-bottom: 10px;
+	}
+}
+
+#file-export-a{
+	display:none;
+}
+
+#delete-modal{
+	.modal-footer{
+		padding: 15px 50px;
+	}
+}
+
+/*--------------data部分---------------------*/
+.data-con{
+	width:100%;
+    height:400px;
+    margin:0 auto;    
+
+	#data-export{
+		a{
+			&:hover{
+				text-decoration: none;
+			}
+		}
+	}
+
+	.table-name-star{
+		display: none;
+	    margin-left: 10px;
+	}
+
+	#table-name{
+		border-bottom: 1px solid $blue-bgc;
+		color: $blue-bgc;
+		display: inline-block;
+	}
+
+	#con{
+		width:100%;
+	    height:100%;
+	    overflow: hidden;
+	    margin:20px auto 0;
+	}
+}
+
+#data-con{
+	section{
+		padding: 0;
+		margin-bottom: 10px;
+	}
+}
+
+/*-----------modal-------------*/
+.modal{
+	h4.modal-title{
+		text-align: center;
+	}
+}
+
+.modal-body{
+	p{
+		text-align: center;
+
+		span{
+			margin-right: 20px;
+		}
+	}
+}
+
+#upload-modal{
+	input{
+		display: inline-block;
+	}
+}
+
+/*---------------页脚--------------------*/
+.footer {
+    width: 100%;
+    background-color: #f8ecc2;
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    z-index: 1030;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
