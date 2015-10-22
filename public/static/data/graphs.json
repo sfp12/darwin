@@ -1,4 +1,0 @@
-[{"id":1,"text":"Graphs","children":[
-                      {"id":2,"text":"date1","children":[{"id":4,"text":"graphs1 of date1"},{"id":5,"text":"graphs2 of date1"}]},
-                      {"id":3,"text":"data2","children":[{"id":6,"text":"graphs1 of date2"},{"id":7,"text":"graphs2 of date1"}]}
-                      ]}]
